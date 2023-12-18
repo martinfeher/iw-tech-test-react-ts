@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import Select from 'react-select';
+import { useEffect } from "react";
+
 
 const tableStyle = {
   background: "rgba(51, 51, 51, 0.9)",
@@ -11,7 +11,6 @@ const tableStyle = {
 
 export const PaginatedEstablishmentsTable = () => {
 
-  const [authorities, setAuthorities] = useState([{}]);
 
   useEffect(() => {
 
@@ -45,25 +44,21 @@ export const PaginatedEstablishmentsTable = () => {
         });
 
         setAuthorities(selectAuthorities);
-       
+
+        // Preselect the first authority
+        if (selectAuthorities.length > 0) {
+          setSelectedAuthority(selectAuthorities[0]);
+          handleSelectAuthority(selectAuthorities[0]);
+        }
       });
 
+      });
   }, []);
  
     return (
       <div style={tableStyle}>
-        <h2 className="mb-[10px] text-[22px]">Food Hygiene Ratings</h2>
-        <div>
-          <div className="mb-[10px] text-gray-300 text-[12px]">
-            Select the local Authority
-          </div>
-          <Select
-            options={authorities && authorities}
-            id="selectAuthority"
-            className=" w-[180px] text-black text-[13px] cursor-pointer"
-            placeholder="Authority select"
-          />
-        </div>
+          <select name="" id="">
+          </select>
       </div>
     );
 };

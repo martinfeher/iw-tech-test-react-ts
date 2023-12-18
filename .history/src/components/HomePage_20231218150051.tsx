@@ -1,10 +1,10 @@
 import { PaginatedEstablishmentsTable } from "./PaginatedEstablishmentsTable";
-// import Background from "../static/logo.svg";
+import Background from "../static/logo.svg";
 
 const logoStyle: { [key: string]: string | number } = {
   width: "640px",
   height: "25px",
-  // background: `transparent url(${Background}) no-repeat center`,
+  background: `transparent url(${Background}) no-repeat center`,
   margin: "20px auto",
 };
 

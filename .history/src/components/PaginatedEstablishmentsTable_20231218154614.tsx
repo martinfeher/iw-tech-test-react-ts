@@ -59,6 +59,7 @@ export const PaginatedEstablishmentsTable = () => {
           </div>
           <Select
             options={authorities && authorities}
+            value={selectedAuthority}
             id="selectAuthority"
             className=" w-[180px] text-black text-[13px] cursor-pointer"
             placeholder="Authority select"
