@@ -1,5 +1,7 @@
-import { useEffect } from "react";
-
+import { useState, useEffect } from "react";
+import { EstablishmentsTable } from "./EstablishmentsTable";
+import { EstablishmentsTableNavigation } from "./EstablishmentsTableNavigation";
+import { getEstablishmentRatings } from "../api/ratingsAPI";
 
 const tableStyle = {
   background: "rgba(51, 51, 51, 0.9)",
@@ -26,17 +28,14 @@ export const PaginatedEstablishmentsTable = () => {
       .then((response) => response.json())
       .then((data) => {
         const rqAuthorities = data.authorities;
-
-        console.log('rqAuthorities');
-        console.log(rqAuthorities);
+        
 
       });
   }, []);
  
     return (
       <div style={tableStyle}>
-          <select name="" id="">
-          </select>
+          <select name="" id=""></select>
       </div>
     );
 };
