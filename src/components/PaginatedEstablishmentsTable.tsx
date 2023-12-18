@@ -12,6 +12,7 @@ const tableStyle = {
 export const PaginatedEstablishmentsTable = () => {
 
   const [authorities, setAuthorities] = useState([{}]);
+  const [selectedAuthority, setSelectedAuthority] = useState({});
 
   useEffect(() => {
 
@@ -49,6 +50,38 @@ export const PaginatedEstablishmentsTable = () => {
       });
 
   }, []);
+
+  const handleSelectAuthority = (selectedItem: any) => {
+    setSelectedAuthority(selectedItem);
+    loadEstablishmentData(selectedItem.value, selectedItem.schemeType);
+  };
+
+  interface IEstablishmentItem {
+    BusinessName: string;
+    RatingPercentage: string;
+    RatingValue: string;
+  }
+
+  const loadEstablishmentData = (
+    localAUthorityId: number,
+    schemeTypeNational: number
+  ) => {
+    const rqOptions = {
+      method: "GET",
+      headers: { "x-api-version": "2" },
+    };
+    const url: string =
+      "http://api.ratings.food.gov.uk/Establishments?localAuthorityId=" +
+      localAUthorityId.toString();
+
+    const rq = fetch(url, rqOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('data.establishments');
+        console.log(data.establishments);
+    
+      });
+  };
  
     return (
       <div style={tableStyle}>
@@ -59,7 +92,9 @@ export const PaginatedEstablishmentsTable = () => {
           </div>
           <Select
             options={authorities && authorities}
+            value={selectedAuthority}
             id="selectAuthority"
+            onChange={(e) => handleSelectAuthority(e)}
             className=" w-[180px] text-black text-[13px] cursor-pointer"
             placeholder="Authority select"
           />
