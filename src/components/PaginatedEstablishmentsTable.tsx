@@ -101,9 +101,82 @@ export const PaginatedEstablishmentsTable = () => {
           });
         });
 
-        setTableEstablishments(establishmentItems);
+        setTableEstablishments(
+          orderEstablishments(establishmentItems, schemeTypeNational)
+        );
         setLoadingEstablishments(false);
       });
+  };
+
+  // Order establishments based on the English and Scottish scheme examples
+  const orderEstablishments = (
+    establishmentItems: IEstablishmentItem[],
+    schemeType: number
+  ): any => {
+    // FHRS ratings order by filter items and order filtered arrays
+    if (schemeType === 1) {
+      const establishmentItems5: IEstablishmentItem[] =
+        establishmentItems.filter((row) => {
+          return row.RatingValue === "5";
+        });
+
+      const establishmentItems4: IEstablishmentItem[] =
+        establishmentItems.filter((row) => {
+          return row.RatingValue === "4";
+        });
+
+      const establishmentItems3: IEstablishmentItem[] =
+        establishmentItems.filter((row) => {
+          return row.RatingValue === "3";
+        });
+
+      const establishmentItems2: IEstablishmentItem[] =
+        establishmentItems.filter((row) => {
+          return row.RatingValue === "2";
+        });
+
+      const establishmentItems1: IEstablishmentItem[] =
+        establishmentItems.filter((row) => {
+          return row.RatingValue === "1";
+        });
+
+      const establishmentItemsExempt: IEstablishmentItem[] =
+        establishmentItems.filter((row) => {
+          return row.RatingValue === "Exempt";
+        });
+
+      return [
+        ...establishmentItems5,
+        ...establishmentItems4,
+        ...establishmentItems3,
+        ...establishmentItems2,
+        ...establishmentItems1,
+        ...establishmentItemsExempt,
+      ];
+
+      // FHIS ratings order by filter items and order filtered arrays
+    } else if (schemeType === 2) {
+      const establishmentItemsPassAndEatSafe: IEstablishmentItem[] =
+        establishmentItems.filter((row) => {
+          return row.RatingValue === "Pass and Eat Safe";
+        });
+
+      const establishmentItemsPass: IEstablishmentItem[] =
+        establishmentItems.filter((row) => {
+          return row.RatingValue === "Pass";
+        });
+
+      const establishmentItemsImprovementRequired: IEstablishmentItem[] =
+        establishmentItems.filter((row) => {
+          return row.RatingValue === "Improvement Required";
+        });
+
+      return [
+        ...establishmentItemsPassAndEatSafe,
+        ...establishmentItemsPass,
+        ...establishmentItemsImprovementRequired,
+      ];
+    }
   };
 
 
